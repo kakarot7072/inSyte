@@ -6,6 +6,7 @@ import Signup from './components/SignupForm.js';
 import Home from './components/Home.js';
 import RealTimeDataPage from './components/RealTimeDataPage.js';
 import PredictiveAnalyticsPage from './PredictiveAnalyticsPage.js';
+import AnalyticsPage from './components/AnalyticsPage.js';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/realtime-data" element={<RealTimeDataPage />} />
         <Route path="/predictive-analytics" element={<PredictiveAnalyticsPage />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
     </Routes>
   );
 }
