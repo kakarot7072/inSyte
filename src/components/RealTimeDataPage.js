@@ -1,4 +1,5 @@
 
+
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -10,27 +11,54 @@ function RealTimeDataPage() {
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadSuccessful, setIsUploadSuccessful] = useState(false);
 
-  const handleFileUpload = (event) => {
+  const handleFileUpload = async (event) => {
     const file = event.target.files[0];
-    if (file && file.type === "text/csv") {
-      setIsUploading(true);
-      setUploadMessage("Uploading...");
-      
-      // Simulate file upload with a delay
-      setTimeout(() => {
+
+    if (!file) {
+        setUploadMessage("Please select a file.");
+        return;
+    }
+
+    if (file.type !== "text/csv") {
+        setUploadMessage("Only CSV files are allowed.");
+        return;
+    }
+
+    setIsUploading(true);
+    setUploadMessage("Uploading...");
+
+    // Prepare the form data for uploading
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+        // Sending the file to your backend API
+        const response = await fetch("http://localhost:5000/api/upload", {
+            method: "POST",
+            body: formData,
+        });
+
+        // Handle response from backend
+        const data = await response.json();
+
+        if (response.ok) {
+            setUploadMessage("File uploaded successfully!");
+            setIsUploadSuccessful(true);
+        } else {
+            setUploadMessage(`Upload failed: ${data.error}`);
+        }
+    } catch (error) {
+        console.error("Upload error:", error);
+        setUploadMessage("Upload failed. Please try again.");
+    } finally {
         setIsUploading(false);
-        setUploadMessage("File uploaded successfully!");
-        setIsUploadSuccessful(true); // Mark upload as successful
-        
+
         // Hide the message after 5 seconds
         setTimeout(() => {
-          setUploadMessage("");
+            setUploadMessage("");
         }, 5000);
-      }, 2000); // Simulate 2 seconds delay for upload
-    } else {
-      setUploadMessage("Please upload a valid CSV file.");
     }
-  };
+};
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-gray-100 via-white to-gray-200 flex flex-col items-center justify-center p-2">
