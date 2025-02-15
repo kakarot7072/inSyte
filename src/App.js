@@ -8,6 +8,8 @@ import RealTimeDataPage from './components/RealTimeDataPage.js';
 import PredictiveAnalyticsPage from './PredictiveAnalyticsPage.js';
 import AnalyticsPage from './components/AnalyticsPage.js';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import Service from './components/Service.js'
+import { Contact } from 'lucide-react';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -39,6 +41,9 @@ function App() {
           <Route path="/realtime-data" element={<RealTimeDataPage />} />
           <Route path="/predictive-analytics" element={<PredictiveAnalyticsPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
+          <Route path="/services" element={<Service/>} />
+          <Route path="/contact" element={<Contact/>} />
+          
         </Routes>
       )}
     </div>
