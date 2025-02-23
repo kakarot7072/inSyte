@@ -43,7 +43,7 @@ const Service = () => {
             >
               <Link to={btn.link}>
                 <button
-                  className={`bg-${btn.color}-500 hover:bg-${btn.color}-600 text-white px-8 py-3 rounded-lg text-lg font-medium shadow`}
+                  className={`bg-${btn.color}-500 hover:bg-${btn.color}-600 text-blue px-8 py-3 rounded-lg text-lg font-medium shadow`}
                 >
                   {btn.label}
                 </button>

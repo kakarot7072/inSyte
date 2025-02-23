@@ -59,7 +59,7 @@ function RealTimeDataPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        Select Your Data Type
+        Select Your Organisation
       </motion.h1>
 
       <div className="flex space-x-6">

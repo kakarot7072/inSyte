@@ -10,6 +10,9 @@ import AnalyticsPage from './components/AnalyticsPage.js';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import Service from './components/Service.js'
 import { Contact } from 'lucide-react';
+import Dashboard from './components/Dashboard.js';
+import UserProfile from './components/UserProfile.js';
+import logo from './components/Assets/weblogo.png';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -26,11 +29,7 @@ function App() {
       {loading ? (
         // Show Lottie loader while the content is loading
         <div className="absolute inset-0 flex justify-center items-center animate-popOut">
-          <DotLottieReact
-            src="https://lottie.host/8d48b5a1-d654-494b-815c-e3b4cbdad464/AC1uyV5YD9.lottie"
-            loop
-            autoplay
-          />
+         <h1 className='font-extrabold text-8xl ' loop autoPlay >înSyté</h1>
         </div>
       ) : (
         // Once loading is complete, show the routes and main content
@@ -43,6 +42,9 @@ function App() {
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/services" element={<Service/>} />
           <Route path="/contact" element={<Contact/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/profile" element={<UserProfile/>} />
+
           
         </Routes>
       )}

@@ -1,16 +1,18 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Home, Settings, Phone, Layout, User, ChevronDown, BarChart2, Brain, Target, Users, ArrowRight } from 'lucide-react';
+import {  BarChart2, Brain, Target, Users, ArrowRight } from 'lucide-react';
 import 'animate.css';
 import { useInView } from 'react-intersection-observer';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
 
   const { ref: statsRef, inView: statsInView } = useInView({
     triggerOnce: true,
@@ -26,11 +28,18 @@ function HomePage() {
     triggerOnce: true,
     threshold: 0.2,
   });
+  const handleSignOut = () => {
+    console.log("Signing out..."); // Debugging log
+    localStorage.removeItem("userToken");
+    navigate("/login"); // Ensure "/login" route exists
+  };
+
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+   
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -62,7 +71,7 @@ function HomePage() {
     <div className="min-h-screen bg-gradient-to-r from-gray-50 via-white to-gray-100">
       {/* Navigation Bar */}
       
-     <Navbar/>
+     <Navbar handleSignOut={handleSignOut}/>
       {/* Main Content */}
       <div className="pt-16">
         {/* Hero Section */}
@@ -79,7 +88,7 @@ function HomePage() {
               </p>
               <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate__animated animate__fadeIn animate__delay-2s">
                 <Link
-                  to="/demo"
+                  to="/realtime-data"
                   className="inline-flex items-center px-8 py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors group"
                 >
                   Request Demo

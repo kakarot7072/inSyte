@@ -1,26 +1,39 @@
-// components/Navbar.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Home, Settings, Phone, Layout, ChevronDown } from 'lucide-react';
 
-const Navbar = () => {
+import logo from './Assets/weblogo.png';
+
+const Navbar = ({ handleSignOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [fullName, setFullName] = useState("User"); // Default if no user is found
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
+    
+    // Fetch full name from localStorage when the component mounts
+    const storedName = localStorage.getItem("fullName");
+    if (storedName) {
+      setFullName(storedName);
+    }
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 flex justify-between h-16">
         <div className="flex items-center">
           <Link to="/home" className="flex items-center group">
-            <Layout className="h-8 w-8 text-blue-600 group-hover:text-blue-700 transition-colors" />
-            <span className="ml-2 text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">DataAnalytics</span>
+           
+            <span className=" text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+              <img src={logo} className='h-40 w-48 mt-3 '></img>
+            </span>
           </Link>
           <div className="hidden md:flex items-center ml-10 space-x-8">
             {[{ to: '/home', icon: Home, label: 'Home' }, { to: '/services', icon: Settings, label: 'Services' }, { to: '/contact', icon: Phone, label: 'Contact' }].map((item) => (
@@ -37,7 +50,7 @@ const Navbar = () => {
           <div className="relative">
             <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center space-x-3 text-gray-700 hover:text-blue-600 focus:outline-none transition-all duration-300 hover:scale-105">
               <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User profile" className="h-8 w-8 rounded-full object-cover ring-2 ring-blue-100" />
-              <span className="font-medium">John Doe</span>
+              <span className="font-medium">{fullName}</span>
               <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isProfileOpen ? 'rotate-180' : ''}`} />
             </button>
             {isProfileOpen && (
@@ -45,7 +58,15 @@ const Navbar = () => {
                 <Link to="/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Dashboard</Link>
                 <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Your Profile</Link>
                 <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Settings</Link>
-                <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">Sign out</button>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent event bubbling
+                    handleSignOut();
+                  }} 
+                  className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                >
+                  Sign out
+                </button>
               </div>
             )}
           </div>

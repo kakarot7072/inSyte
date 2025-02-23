@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -11,6 +12,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -19,28 +21,59 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
-    if (!name || !email || !password || !confirmPassword) {
-      setError('All fields are required');
-      return;
+    setSuccess('');
+
+    console.log('Email:', email);
+    console.log('Password:', password);
+    console.log('Confirm Password:', confirmPassword);
+
+    if (!email || !password || !confirmPassword) {
+        setError('All fields are required');
+        return;
     }
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
+        setError('Passwords do not match.');
+        return;
     }
 
     try {
-      setLoading(true);
-      // Simulated API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      navigate('/login');
+        setLoading(true);
+        const response = await fetch('http://localhost:5000/api/users/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email, password }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Error registering user');
+        }
+
+        setSuccess('Registration successful! Please login.');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+
+        setTimeout(() => {
+            navigate('/login');
+        }, 2000);
     } catch (err) {
-      setError(err.message);
+        setError(err.message);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+
+
+
+const handleLoginClick = () => {
+    navigate('/login'); // Navigate to Login page when clicked
+};
+
 
   return (
     <div className="min-h-screen flex">
