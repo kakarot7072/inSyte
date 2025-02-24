@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -23,11 +22,7 @@ const Signup = () => {
     setError('');
     setSuccess('');
 
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
-
-    if (!email || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword) {
         setError('All fields are required');
         return;
     }
@@ -39,21 +34,33 @@ const Signup = () => {
 
     try {
         setLoading(true);
-        const response = await fetch('http://localhost:5000/api/users/signup', {
+        
+        const response = await fetch('https://real-time-data-analysis-server.onrender.com/api/auth/signup', {  // ✅ Ensure correct API route
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({email, password }),
+            body: JSON.stringify({ name, email, password }),
         });
 
-        const data = await response.json();
+        // ✅ Log raw response to detect issues
+        const text = await response.text();
+        console.log("Raw Response:", text);
+
+        // ✅ Parse JSON manually
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (jsonError) {
+            throw new Error("Invalid JSON response from server. Check backend logs.");
+        }
 
         if (!response.ok) {
             throw new Error(data.message || 'Error registering user');
         }
 
-        setSuccess('Registration successful! Please login.');
+        setSuccess('Registration successful! Redirecting to login...');
+        setName('');
         setEmail('');
         setPassword('');
         setConfirmPassword('');
@@ -62,14 +69,12 @@ const Signup = () => {
             navigate('/login');
         }, 2000);
     } catch (err) {
+        console.error("Signup Error:", err);
         setError(err.message);
     } finally {
         setLoading(false);
     }
 };
-
-
-
 const handleLoginClick = () => {
     navigate('/login'); // Navigate to Login page when clicked
 };
@@ -234,5 +239,4 @@ const handleLoginClick = () => {
     </div>
   );
 };
-
 export default Signup;

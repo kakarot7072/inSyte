@@ -17,23 +17,45 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
+  
     if (!email || !password) {
       setError('Both fields are required');
       return;
     }
-
+  
     try {
       setLoading(true);
-      // Simulated API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+  
+      const response = await fetch('https://real-time-data-analysis-server.onrender.com/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+      console.log('Response Status:', response.status);
+      console.log('Response Data:', data);
+  
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed');
+      }
+  
+      if (rememberMe) {
+        localStorage.setItem('token', data.token);
+      } else {
+        sessionStorage.setItem('token', data.token);
+      }
+  
       navigate('/home');
+  
     } catch (err) {
+      console.error('Login Error:', err);
       setError(err.message);
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen flex">
@@ -178,5 +200,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
