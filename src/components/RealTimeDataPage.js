@@ -31,7 +31,7 @@ function RealTimeDataPage() {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const response = await fetch("https://real-time-data-analysis-server.onrender.com/api/upload", {
+      const response = await fetch("http://localhost:5000/api/upload", {
         method: "POST",
         body: formData,
       });

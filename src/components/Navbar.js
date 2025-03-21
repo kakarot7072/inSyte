@@ -1,29 +1,61 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, Home, Settings, Phone, Layout, ChevronDown } from 'lucide-react';
 
 import logo from './Assets/weblogo.png';
-
 const Navbar = ({ handleSignOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [fullName, setFullName] = useState("User"); // Default if no user is found
+  const [profileData, setProfileData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    location: "",
+    bio: "",
+    profileImage: ""
+  });
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    
-    // Fetch full name from localStorage when the component mounts
-    const storedName = localStorage.getItem("fullName");
-    if (storedName) {
-      setFullName(storedName);
-    }
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
 
-    return () => window.removeEventListener('scroll', handleScroll);
+        const response = await fetch("http://localhost:5000/api/users/profile", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch profile");
+        }
+
+        const data = await response.json();
+
+        // Store username in localStorage
+        localStorage.setItem("fullName", data.username || "User");
+
+        // Set profile data correctly
+        setProfileData({
+          name: data.username,
+          email: data.email,
+          phone: data.phone || "",
+          location: data.location || "",
+          bio: data.bio || "",
+          profileImage: data.profileImage || ""
+        });
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchProfile();
   }, []);
-  
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'}`}>

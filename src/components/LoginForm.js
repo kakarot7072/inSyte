@@ -26,7 +26,7 @@ const Login = () => {
     try {
       setLoading(true);
   
-      const response = await fetch('https://real-time-data-analysis-server.onrender.com/api/auth/login', {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -40,14 +40,18 @@ const Login = () => {
         throw new Error(data.message || 'Login failed');
       }
   
+      // ✅ Store token in localStorage
+      localStorage.setItem('token', data.token);
+  
       if (rememberMe) {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem('userToken', data.token);
+        localStorage.setItem('userData', JSON.stringify(data.user));
       } else {
-        sessionStorage.setItem('token', data.token);
+        sessionStorage.setItem('userToken', data.token);
+        sessionStorage.setItem('userData', JSON.stringify(data.user));
       }
   
       navigate('/home');
-  
     } catch (err) {
       console.error('Login Error:', err);
       setError(err.message);
@@ -55,7 +59,6 @@ const Login = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="min-h-screen flex">

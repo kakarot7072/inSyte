@@ -35,7 +35,7 @@ const Signup = () => {
     try {
         setLoading(true);
         
-        const response = await fetch('https://real-time-data-analysis-server.onrender.com/api/auth/signup', {  // ✅ Ensure correct API route
+        const response = await fetch('http://localhost:5000/api/auth/signup', {  // ✅ Ensure correct API route
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,10 +64,9 @@ const Signup = () => {
         setEmail('');
         setPassword('');
         setConfirmPassword('');
-
         setTimeout(() => {
-            navigate('/login');
-        }, 2000);
+          navigate('/login');
+        }, 1500);       
     } catch (err) {
         console.error("Signup Error:", err);
         setError(err.message);
