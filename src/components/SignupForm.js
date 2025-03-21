@@ -35,7 +35,7 @@ const Signup = () => {
     try {
         setLoading(true);
         
-        const response = await fetch('http://localhost:5000/api/auth/signup', {  // ✅ Ensure correct API route
+        const response = await fetch('https://rtda-server.onrender.com/api/auth/signup', {  // ✅ Ensure correct API route
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
