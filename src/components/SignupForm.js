@@ -35,19 +35,15 @@ const Signup = () => {
     try {
         setLoading(true);
         
-        const response = await fetch('https://rtda-server.onrender.com/api/auth/signup', {  // ✅ Ensure correct API route
+        const response = await fetch("http://localhost:5000/api/auth/signup", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ name, email, password }),
         });
-
-        // ✅ Log raw response to detect issues
         const text = await response.text();
         console.log("Raw Response:", text);
-
-        // ✅ Parse JSON manually
         let data;
         try {
             data = JSON.parse(text);

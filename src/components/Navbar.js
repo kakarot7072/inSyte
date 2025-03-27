@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Menu, X, Home, Settings, Phone, ChevronDown } from 'lucide-react';
 
 import logo from './Assets/weblogo.png';
+import image from './Assets/default.jpg'
 
 const Navbar = ({ handleSignOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,6 +58,7 @@ const Navbar = ({ handleSignOut }) => {
         localStorage.setItem("fullName", data.username || "User");
 
         // Set profile data
+        setFullName(data.username || "User");
         setProfileData({
           name: data.username,
           email: data.email,
@@ -101,7 +103,7 @@ const Navbar = ({ handleSignOut }) => {
           <div className="hidden md:flex items-center">
             <div className="relative">
               <button onClick={() => setIsProfileOpen(!isProfileOpen)} className="flex items-center space-x-3 text-gray-700 hover:text-blue-600 focus:outline-none transition-all duration-300 hover:scale-105">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User profile" className="h-8 w-8 rounded-full object-cover ring-2 ring-blue-100" />
+                <img src= {image} alt="User profile" className="h-8 w-8 rounded-full object-cover ring-2 ring-blue-100" />
                 <span className="font-medium">{fullName}</span>
                 <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isProfileOpen ? 'rotate-180' : ''}`} />
               </button>

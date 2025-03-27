@@ -6,6 +6,13 @@ import { useInView } from 'react-intersection-observer';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { useNavigate } from "react-router-dom";
+import image1 from './Assets/IMG_5090.JPG'
+import image2 from './Assets/PHOTO-2025-03-26-11-57-39.jpg';
+import image3 from './Assets/PHOTO-2025-03-26-12-01-34.jpg';
+import image4 from './Assets/PHOTO-2025-03-26-12-01-35.jpg';
+import image5 from './Assets/PHOTO-2025-03-26-12-07-45.jpg';
+
+
 
 function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,16 +60,34 @@ function HomePage() {
 
   const testimonials = [
     {
-      name: 'Sarah Johnson',
-      role: 'CTO at TechCorp',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      content: 'The predictive analytics capabilities have transformed how we make business decisions. Incredible tool!',
+      name: 'Yogendra Singh ',
+      role: 'Backend Developer',
+      image: image1,
+     
     },
     {
-      name: 'Michael Chen',
-      role: 'Data Scientist at Analytics Co',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      content: "The real-time visualization features are unmatched. It has become an essential part of our daily operations.",
+      name: 'Piyush Gupta',
+      role: 'Power BI Developer',
+      image: image2,
+     
+    },
+    {
+      name: 'Shreya Keshari',
+      role: 'Frontend Developer',
+      image: image3,
+     
+    },
+    {
+      name: 'Raman Singh',
+      role: 'Data Engineer ',
+      image: image4,
+      
+    },
+    {
+      name: 'Siddhi Sudrania',
+      role: 'Cloud Developer',
+      image: image5,
+      
     },
   ];
 
@@ -157,28 +182,44 @@ function HomePage() {
         </section>
 
         {/* Testimonials Section */}
-        <section className="bg-gray-50 py-16" ref={testimonialsRef}>
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-blue-600">What Our Clients Say</h2>
-              <p className="mt-2 text-lg text-gray-600">See how our platform has helped companies achieve their goals.</p>
-            </div>
-            <div className="flex overflow-x-auto gap-8">
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.name} className="flex flex-col items-center bg-white rounded-xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="h-24 w-24 rounded-full object-cover"
-                  />
-                  <p className="mt-6 text-xl text-gray-600 italic">"{testimonial.content}"</p>
-                  <h3 className="mt-4 text-xl font-semibold text-blue-600">{testimonial.name}</h3>
-                  <p className="text-lg text-gray-500">{testimonial.role}</p>
-                </div>
-              ))}
-            </div>
+        {/* Testimonials Section */}
+
+
+{/* Testimonials Section */}
+
+{/* Testimonials Section */}
+<section className="bg-gray-50 py-16">
+  <div className="max-w-7xl mx-auto px-4">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-blue-600">Meet Our Team Members</h2>
+    </div>
+
+    {/* Outer wrapper for scrolling effect */}
+    <div className="relative overflow-hidden w-full">
+      <div className="flex space-x-6 animate-slide">
+        {/* Duplicate testimonials list to create seamless scrolling */}
+        {[...testimonials, ...testimonials].map((testimonial, index) => (
+          <div
+            key={index}
+            className="w-[320px] flex-shrink-0 bg-white rounded-xl shadow-lg p-6 text-center"
+          >
+            <img
+              src={testimonial.image}
+              alt={testimonial.name}
+              className="h-24 w-24 mx-auto rounded-full object-cover"
+            />
+            <h3 className="mt-4 text-xl font-semibold text-blue-600">
+              {testimonial.name}
+            </h3>
+            <p className="text-lg text-gray-500">{testimonial.role}</p>
           </div>
-        </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+
       </div>
       <Footer/>
     </div>
