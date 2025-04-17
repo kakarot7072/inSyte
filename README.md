@@ -1,3 +1,6 @@
+![](https://github.com/shreya792/REAL_TIME_DATA_ANALYSIS/blob/main/src/components/Assets/inSyte_Light.png)
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
