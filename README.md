@@ -1,73 +1,61 @@
 ![](https://github.com/shreya792/REAL_TIME_DATA_ANALYSIS/blob/main/src/components/Assets/inSyte_Light.png)
 ---
 
-# Getting Started with Create React App
+## 👨‍💻 My Contribution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+As a core team member of the **Real-Time Data Analysis and Visualization Platform Using Power BI**, my responsibilities spanned across both data engineering and business intelligence layers of the system. My contribution was focused on three major aspects of the project: **Data Pipeline Development**, **Data Processing with Azure Databricks** and **Interactive Dashboard Design in Power BI**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### 🔄 Data Pipeline Development (Azure Integration)
 
-### `npm start`
+- **Designed and implemented the end-to-end data pipeline** to ingest and process structured data from both CSV uploads and API endpoints.
+- Built a **robust and scalable architecture using Azure Data Factory (ADF)** to orchestrate data movement, transformation and loading workflows.
+- Configured pipeline triggers to **automatically detect and process newly uploaded data**, minimizing manual intervention and latency.
+- Ensured real-time ingestion performance using **streaming datasets and batch triggers** where appropriate.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### ⚙️ Data Processing with Azure Databricks (PySpark)
 
-### `npm test`
+- Developed and maintained **PySpark notebooks on Azure Databricks** to handle preprocessing tasks such as:
+  - Data cleaning (removing duplicates, handling missing values)
+  - Schema validation and transformation
+  - Aggregation and enrichment for metrics calculation
+- Leveraged the distributed nature of Databricks to **scale data processing for larger datasets**, enabling near real-time performance.
+- Designed a modular notebook structure for **reusability and maintainability** in future use cases and team handovers.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+### 📊 Power BI Dashboard Development & Deployment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Created **interactive, real-time dashboards in Power BI Desktop** to present KPIs, trends, and insights in a visually compelling and intuitive manner.
+- Enabled **real-time streaming visuals** using Power BI’s push dataset features and integrated dashboards into the web platform.
+- Implemented advanced Power BI features including:
+  - **Slicers, filters, and drill-down** for dynamic exploration
+  - **Custom DAX measures** for calculated insights
+  - Optimized visuals for performance using **DirectQuery and incremental refresh**
+- Deployed dashboards on **Power BI Service**, set up **role-based access**, and ensured secure sharing and access control.
+- Significantly reduced dashboard latency (from 30+ seconds to <5 seconds) for **near-instant insights**, enhancing end-user experience.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🚀 Impact of My Work
 
-### `npm run eject`
+- **Streamlined the flow of real-time data from ingestion to visualization**, bridging the gap between backend engineering and frontend analytics.
+- Played a vital role in ensuring that **non-technical users (faculty, admins)** could access up-to-date, actionable insights with minimal complexity.
+- Improved overall performance and user satisfaction by contributing to **automation, scalability, and visual clarity** of the platform.
+- Enabled **future extensibility** by designing reusable, modular components in both Databricks and Power BI layers.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> ✅ _Tools & Technologies Used_:  
+> - Azure Databricks, PySpark  
+> - Azure Data Factory  
+> - Microsoft Power BI Desktop & Power BI Service  
+> - Power Query, DAX, Pandas  
+> - Azure Blob Storage, GitHub for version control
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> 📌 _My work has been critical in delivering a real-time data analytics solution that is fast, user-friendly and production-ready. It reflects a deep understanding of data engineering pipelines, cloud platforms and modern BI tooling._
